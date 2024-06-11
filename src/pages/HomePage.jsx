@@ -12,7 +12,7 @@ const HomePage = () => {
     <div>
       <Navbar />
       <Carousel />
-      <div className="flex flex-wrap gap-4 mt-[-250px] z-1 ">
+      <div className="flex flex-wrap justify-around mt-[-250px] z-10 relative ">
 
       
       <SectionCard

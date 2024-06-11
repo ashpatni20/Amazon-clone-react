@@ -33,7 +33,7 @@ const Crousel = () => {
   };
 
   return (
-    <div className=" relative w-full mx-auto border-red-500 p-0">
+    <div className=" relative w-full mx-auto border-red-500 p-0 z-0">
       <div className="overflow-hidden relative border border-red-500 w-full h-[550px]">
         {courselimgs.map((img, index) => (
           <img

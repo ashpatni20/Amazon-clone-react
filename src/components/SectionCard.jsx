@@ -1,9 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
+import SectionProducts from "../pages/SectionProducts";
+import { ProductContext } from "../main";
 
 const SectionCard = ({ value }) => {
   const { StaticData, heading, productname } = value;
-  
+ 
+  const {setProduct} = useContext(ProductContext);
+
+  let navigate = useNavigate();
+
   const [showData, setShowData] = useState(StaticData[0]?.data?.products || []);
 
   const [sectionData, setSectionData] = useState([]);
@@ -17,17 +24,25 @@ const SectionCard = ({ value }) => {
     setSectionData(newSectionData);
   };
 
-  const handleShowData = () => {};
+  const handleShowData = () => {
+    // <SectionProducts products={showData} />;
+    setProduct(showData);
+    navigate("/products");
+    return;
+  };
 
   return (
-    <div className="p-2 shadow-2xl bg-slate max-w-[350px] min-w-[350px]" onClick={handleShowData}>
+    <div
+      className="p-2 shadow-2xl  max-w-[320px] min-w-[320px] bg-white "
+      onClick={handleShowData}
+    >
       <h1 className="text-2xl font-bold p-4 ">{heading}</h1>
       {showData.length !== 0 ? (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-6 justify-center items-center">
           {sectionData.map((product) => (
             <div key={v4()}>
               <img
-                className="w-[150px] h-[160px] object-contain"
+                className="w-[100px] h-[100px] object-contain border border-slate-200 p-2"
                 src={product.product_photo}
                 alt=""
               />

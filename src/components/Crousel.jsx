@@ -33,14 +33,14 @@ const Crousel = () => {
   };
 
   return (
-    <div className=" relative w-full mx-auto border-red-500 p-0 z-0">
-      <div className="overflow-hidden relative border border-red-500 w-full h-[550px]">
+    <div className=" relative w-full mx-auto p-0 z-0 bg-gradient-to-t">
+      <div className="overflow-hidden relative w-full h-[550px]">
         {courselimgs.map((img, index) => (
           <img
             key={index}
             src={img}
             alt={`Slide ${index}`}
-            className={`absolute inset-0 w-full h-full transition-transform duration-500 ${
+            className={`absolute inset-0 w-full h-full bg-gradient-to-t transition-transform duration-500 ${
               index === currentIndex ? "translate-x-0" : "translate-x-full"
             }`}
           />

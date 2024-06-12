@@ -6,14 +6,10 @@ import { ProductContext } from "../main";
 
 const SectionCard = ({ value }) => {
   const { StaticData, heading, productname } = value;
- 
   const {setProduct} = useContext(ProductContext);
-
-  let navigate = useNavigate();
-
   const [showData, setShowData] = useState(StaticData[0]?.data?.products || []);
-
   const [sectionData, setSectionData] = useState([]);
+  let navigate = useNavigate();
 
   useEffect(() => {
     handleData();

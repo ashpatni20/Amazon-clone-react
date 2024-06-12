@@ -10,39 +10,75 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import SectionProducts from "./pages/SectionProducts.jsx";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
+import { GoogleAuthProvider, signInWithRedirect, signOut } from "firebase/auth";
+import { auth } from "./firbase/firebase.jsx";
 
 export const ProductContext = createContext();
-
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
+    element: <App />,
   },
   {
     path: "/products",
     element: <SectionProducts />,
   },
   {
-    path:"/detailProducts",
-    element:<ProductDetails/>,
+    path: "/detailProducts",
+    element: <ProductDetails />,
   },
   {
-    path:"/cart",
-    element: <Cart />
-  }
+    path: "/cart",
+    element: <Cart />,
+  },
 ]);
 
 const HandleContext = () => {
   const [products, setProduct] = useState();
   const [detailProduct, setDetailProduct] = useState();
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart")) || [])
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("cart")) || []
+  );
+  const [currUser, setCurrUser] = useState(null);
+
+  const signWithGoogle = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithRedirect(auth, provider);
+  };
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setCurrUser(user);
+    });
+
+    return unsubscribe;
+  });
+
+  const logOut = () => {
+    signOut(auth);
+  };
+
+  
 
   return (
-    <ProductContext.Provider value={{products, setProduct, detailProduct, setDetailProduct, setCart, cart}}>
+    <ProductContext.Provider
+      value={{
+        products,
+        setProduct,
+        detailProduct,
+        setDetailProduct,
+        setCart,
+        cart,
+        currUser,
+        setCurrUser,
+        signWithGoogle,
+        logOut,
+      }}
+    >
       <RouterProvider router={router} />
     </ProductContext.Provider>
   );

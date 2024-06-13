@@ -1,7 +1,5 @@
 # Amazon Clone React App
 
-![Amazon Clone](insert_image_url_here)
-
 ## Project Overview
 
 This project is an Amazon clone built using React, Firebase for authentication, and Context API for state management. It aims to replicate the core functionalities of Amazon for a seamless shopping experience.

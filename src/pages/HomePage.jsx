@@ -1,6 +1,7 @@
 // import React from 'react'
 
 import Carousel from "../components/Crousel";
+import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import SectionCard from "../components/SectionCard";
 import { CurtainsData, ElectronicsData, MensData, WomenData } from "../utils/data";
@@ -10,7 +11,8 @@ const HomePage = () => {
   // const [data, loadind, error] = useFetch();
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Header />
       <Carousel />
       <div className="flex flex-wrap justify-around mt-[-250px] z-10 relative ">
 

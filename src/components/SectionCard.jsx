@@ -3,17 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import SectionProducts from "../pages/SectionProducts";
 import { ProductContext } from "../main";
+import useFetch from "../utils/useProduct";
 
 const SectionCard = ({ value }) => {
   const { StaticData, heading, productname } = value;
-  const {setProduct} = useContext(ProductContext);
+  const {val, setVal} = useContext(ProductContext);
   const [showData, setShowData] = useState(StaticData[0]?.data?.products || []);
   const [sectionData, setSectionData] = useState([]);
   let navigate = useNavigate();
 
+
   useEffect(() => {
     handleData();
-  }, [showData]);
+
+  }, [productname, StaticData]);
+
+
 
   const handleData = () => {
     const newSectionData = showData.slice(0, 4);
@@ -22,7 +27,7 @@ const SectionCard = ({ value }) => {
 
   const handleShowData = () => {
     // <SectionProducts products={showData} />;
-    setProduct(showData);
+    setVal(productname)
     navigate("/products");
     return;
   };

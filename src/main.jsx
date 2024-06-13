@@ -40,10 +40,13 @@ const router = createBrowserRouter([
 const HandleContext = () => {
   const [products, setProduct] = useState();
   const [detailProduct, setDetailProduct] = useState();
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("cart")) || []
-  );
   const [currUser, setCurrUser] = useState(null);
+
+  const [cart, setCart] = useState([]);
+  const [input, setInput] = useState("")
+  const [searchVal, setSearchVal] = useState("")
+  const [val, setVal] = useState("")
+  
 
   const signWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -77,6 +80,9 @@ const HandleContext = () => {
         setCurrUser,
         signWithGoogle,
         logOut,
+        input, setInput,
+        searchVal, setSearchVal,
+        val, setVal,
       }}
     >
       <RouterProvider router={router} />

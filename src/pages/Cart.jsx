@@ -3,12 +3,14 @@ import Navbar from "../components/Navbar";
 import { ProductContext } from "../main";
 import CartCard from "../components/CartCard";
 import BillSection from "../components/BillSection";
+import Header from "../components/Header";
+import EmptyCart from "../components/EmptyCart";
 
 const Cart = () => {
-  const { cart, setCart } = useContext(ProductContext);
+  const { cart, setCart, currUser } = useContext(ProductContext);
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
+    if(currUser) localStorage.setItem(currUser.uid, JSON.stringify(cart))
   }, [cart])
 
   const addCount = (id) => {
@@ -45,11 +47,12 @@ const Cart = () => {
 
   return (
     <>
-      <Navbar />
-      {cart.length === 0 ? (
-        <h1 className="text-3xl font-bold text-center">Cart is empty</h1>
+      {/* <Navbar /> */}
+      <Header />
+      {cart == null  || cart?.length === 0 ? (
+        <EmptyCart />
       ) : (
-        <div>
+        <div className="bg-slate-200 flex flex-auto justify-around">
         <div>
           {cart.map((ele) => {
             return <CartCard key={ele.asin} data={ele} addCount={addCount} removeCount={removeCount} removeItem={removeItem}/>;

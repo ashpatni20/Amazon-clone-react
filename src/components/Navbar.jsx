@@ -1,5 +1,3 @@
-// import React from 'react'
-
 import { AMAZON_LOGO } from "../utils/common";
 import india from "../assets/india.svg";
 import { CiLocationOn, CiSearch } from "react-icons/ci";
@@ -9,12 +7,20 @@ import { ProductContext } from "../main";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const {cart} = useContext(ProductContext)
+  const {cart, signWithGoogle, currUser} = useContext(ProductContext)
   const navigate = useNavigate()
 
   const goToCart = () => {
     navigate("/cart")
   }
+
+  const handleSignIn = async () => {
+    try {
+      await signWithGoogle();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleHomePage = () => {
     navigate("/")
@@ -38,7 +44,9 @@ const Navbar = () => {
         <img className="w-[20px]" src={india} alt="" />
         <span>IN</span>
       </div>
-      <div className="flex flex-col text-sm">
+      <div className="flex flex-col text-sm cursor-pointer" onClick={() => {
+              handleSignIn();
+            }}>
         <p>Hello, sign in</p>
         <p>Account & Lists</p>
       </div>

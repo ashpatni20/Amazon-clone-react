@@ -2,15 +2,14 @@
 
 import { useContext } from "react";
 import { ProductContext } from "../main";
-import Navbar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
 
 const ProductDetails = () => {
-  const { detailProduct } = useContext(ProductContext);
   const navigate = useNavigate();
-  const { setCart, cart } = useContext(ProductContext);
+  const { setCart, cart, detailProduct, currUser } = useContext(ProductContext);
   const stars = () => {
-    let star = parseInt(detailProduct.product_star_rating);
+    let star = parseInt(detailProduct?.product_star_rating);
     let ans = "";
     for (let i = 0; i < star; i++) {
       ans += "⭐️";
@@ -20,6 +19,11 @@ const ProductDetails = () => {
 
   const handleCart = () => {
     console.log(detailProduct);
+    if(!currUser){
+      navigate("/")
+      alert("Please Login First")
+      return;
+    }
 
     const productIndex = cart.findIndex(
       (item) => item.asin === detailProduct.asin
@@ -38,31 +42,32 @@ const ProductDetails = () => {
   };
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
+      <Header />
       <div>
         <div
-          key={detailProduct.asin}
+          key={detailProduct?.asin}
           className="border border-slate-200 p-4 flex"
         >
           <div className="w-[48%]">
             <img
               className="w-[80%] max-h-[70vh] object-contain"
-              src={detailProduct.product_photo}
+              src={detailProduct?.product_photo}
               alt=""
             />
           </div>
           <div className="w-[48%] p-4">
             <p className="text-2xl font-bold p-4">
-              {detailProduct.product_title}
+              {detailProduct?.product_title}
             </p>
             <p>
               <span className="text-xl font-bold p-4">
-                {detailProduct.product_price}
+                {detailProduct?.product_price}
               </span>
             </p>
             <p className="text-xl p-4">Ratings : {stars()}</p>
-            <p className="text-xl p-4">{detailProduct.coupon_text}</p>
-            <p className="text-sm p-4">{detailProduct.sales_volume}</p>
+            <p className="text-xl p-4">{detailProduct?.coupon_text}</p>
+            <p className="text-sm p-4">{detailProduct?.sales_volume}</p>
 
             <div className="w-[80%] m-auto pt-6">
               <button

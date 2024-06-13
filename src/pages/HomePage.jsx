@@ -3,6 +3,7 @@
 import Carousel from "../components/Crousel";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
+import ProductCarousel from "../components/ProductCarousel";
 import SectionCard from "../components/SectionCard";
 import { CurtainsData, ElectronicsData, MensData, WomenData } from "../utils/data";
 import useFetch from "../utils/useProduct";
@@ -47,6 +48,8 @@ const HomePage = () => {
         }}
       />
       </div>
+
+      <ProductCarousel/>
       
     </div>
   );
